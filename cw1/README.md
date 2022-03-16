@@ -69,9 +69,10 @@ Zamontowaliśmy partycję 1 karty SD, w katalagu /mnt `mount /dev/mmcblk0p1 /mnt
 ![](images/1.8.png)
 
 W folderze output/images uruchomiliśmy server HTTP.
+
 ![](images/1.10.png)
 
-Przesłaliśmy pliki: `Image`, ` cmdline.txt`, `bcm2711-rpi-4-b.dtb` poleceniem `wget <http://10.42.0.1:8000/<adres_pliku>>`
+Przesłaliśmy pliki: `Image`, ` cmdline.txt`, `bcm2711-rpi-4-b.dtb` poleceniem `wget http://10.42.0.1:8000/<adres_pliku>`
 
 ![](images/1.11.png)
 
@@ -89,13 +90,13 @@ Utworzyliśmy plik test.txt, uruchomiliśmy ponownie urządzenie i zgodnie z ocz
 
 ![](images/1.15.png)
 
-Zapisaliśmy konfigurację pliku .confing pod nazwą config_initramfs.
+Zapisaliśmy konfigurację pliku .config pod nazwą config_initramfs.
 
 ## Kompilacja obrazu Linuxa w Buildroot dla Raspberry Pi 4B bez initramfs
 
 Usunęliśmy poprzedni obraz `make linux-dirclean`.
 
-Następnie przeszliśmy do konfiguracji `make menuconfig`, gdzie Zaznaczyliśmy następujące funkcje External toolchain, funkcję ext2/3/4, kompresję i odznaczyliśmy initramfs
+Następnie przeszliśmy do konfiguracji `make menuconfig`, gdzie zaznaczyliśmy następujące funkcje: External toolchain, funkcję ext2/3/4, kompresję i odznaczyliśmy initramfs
 - Toolchain -> Toolchain Type -> External
 - Filesystem images -> cpio the root filesystem -> Compression method -> gzip [x]
 - Filesystem images -> initial RAM filesystem linked into linux kernel [ ]
@@ -104,11 +105,11 @@ Następnie przeszliśmy do konfiguracji `make menuconfig`, gdzie Zaznaczyliśmy 
 
 Po zmianach uruchomiliśmy kompilację poleceniem `make`.
 
-Kompilacja zakończyła się błędem, tak więc musieliśmy zwiększyć rozmiar systemmu plików do 256 MiB.
+Kompilacja zakończyła się błędem, tak więc musieliśmy zwiększyć rozmiar systemu plików do 256 MiB.
 
 ![](images/1.16.png)
 
-Wynikowy obraz jest mniejszy ponieważ nie zawiera on systemu plików, znajduje się tylko system rozruchowy.
+Wynikowy obraz Image jest mniejszy od obrazu z ramdyskiem startowym, ponieważ nie zawiera on systemu plików, znajduje się w nim tylko system rozruchowy.
 
 ## Uruchomienie zbudowanego obrazu
 
@@ -116,31 +117,30 @@ Zamontowaliśmy partycję 1 karty SD, w katalagu /mnt `mount /dev/mmcblk0p1 /mnt
 
 W folderze output/images uruchomiliśmy server HTTP.
 
-Przesłaliśmy pliki: `Image`, ` cmdline.txt`, `bcm2711-rpi-4-b.dtb`, ` rootfs.ext2` poleceniem `wget <http://10.42.0.1:8000/<adres_pliku>>`
+Przesłaliśmy pliki: `Image`, ` cmdline.txt`, `bcm2711-rpi-4-b.dtb`, ` rootfs.ext2` poleceniem `wget http://10.42.0.1:8000/<adres_pliku>`
 
 ![](images/1.20.png)
 
-Dodatkowo plik `rootfs.ext2` nagraliśmy na drugiej partycji `dd if=rootfs.ext2 of=/dev/mmcblk0p2 bs=4096`
-
-![](images/1.17.png)
-
 ![](images/1.21.png)
+
+Dodatkowo plik `rootfs.ext2` nagraliśmy na drugiej partycji `dd if=rootfs.ext2 of=/dev/mmcblk0p2 bs=4096`.
+
 
 Uruchomiliśmy ponownie urządzenie `reboot` przytrzymując przycisk SW4.
 
 System uruchomił się bez żadnych komplikacji.
 
-W celu zweryfikowania poprawności skonfigurowania systemu Buildroot w głównym katalogu utowrzyliśmy plik test.txt `touch /test.txt`.
+W celu zweryfikowania poprawności skonfigurowania systemu Buildroot w głównym katalogu utowrzyliśmy plik test.txt.
 
-![](example.png)
+![](images/1.23.png)
 
 Następnie uruchomiliśmy urządzenie ponownie `reboot` i sprawdziliśmy zawartość głównego katalogu `ls`.
 
-![](example.png)
+![](images/1.22.png)
 
-Jak możemy zauważyć system został skonfigurowany w sposób poprany. Po ponownym uruchomieniu nadal dostępna jest zawartość plików.
+Jak możemy zauważyć system został skonfigurowany w sposób poprawny. Po ponownym uruchomieniu nadal dostępna jest zawartość plików.
 
-Zapisaliśmy konfigurację pliku .confing pod nazwą config_fsext2.
+Zapisaliśmy konfigurację pliku .confing pod nazwą config_fs_ext2.
 
 # Autorzy:
 - Mateusz Brzozowski, 310608
