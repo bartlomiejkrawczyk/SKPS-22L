@@ -44,6 +44,10 @@ config interface 'lan'
 
 `/etc/init.d/network reload`
 
+7. Usuwamy zbiór uruchamiający server DNS/DHCP dnsmasq:
+
+`rm /etc/rc.d/S19dnsmasq`
+
 ## Implementacja w języku Python oraz uruchomienie w OpenWRT / qemu dwóch programów generujących sygnał PWM
 
 1. Aktualizujemy pakiety na OpenWRT:
@@ -54,6 +58,26 @@ config interface 'lan'
 
 `opkg install python3`
 
+3. Przesyłamy program `pwm.py` generujący sygnał pwm:
+
+`scp -P 8888 pwm.py "root@localhost:~"`
+
 ### Generacja sygnałów o zmiennej częstotliwości
 
+1. Uruchamiamy program `pwm.py` z flagą `test` ustawioną na `0`
+
+`python3 pwm.py -t 0`
+
+2. Otrzymujemy program generujący sygnał pwm o zmiennej częstotliwości:
+
+![](images/test_t0.png)
+
 ### Generacja sygnałów o zmiennym wypełnieniu
+
+1. Uruchamiamy program `pwm.py` z flagą `test` ustawioną na `1`
+
+`python3 pwm.py -t 1`
+
+2. Otrzymujemy program generujący sygnał pwm o zmiennym wypełnieniu:
+
+![](images/test_t1.png)

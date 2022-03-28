@@ -16,11 +16,11 @@ def generate_pwm(frequencies, duty_cycles):
         if up_time:
             timestamp = time.monotonic_ns() - start
             print(timestamp, "1", sep="\t")
-            time.sleep(up_time)
+            time.sleep(abs(up_time))
         if down_time:
             timestamp = time.monotonic_ns() - start
             print(timestamp, "0", sep="\t")
-            time.sleep(down_time)
+            time.sleep(abs(down_time))
 
 
 
@@ -30,9 +30,9 @@ def main():
     arg_parser.add_argument("-t", "--test", type=int, default=1, help="Select test:\n 0.Const cycle,\n1.Const frequency")
     args = arg_parser.parse_args()
     if args.test == 0:
-        generate_pwm([1, 2, 3, 4, 5, 4, 3, 2, 1], .5)
+        generate_pwm([9, 1, 9, 1, 2, 3, 4, 5, 6], .1)
     elif args.test == 1:
-        generate_pwm(5, [math.sin(math.pi * i / 20) for i in range(20 + 1)])
+        generate_pwm(10, [math.sin(2 * math.pi * i / 10) for i in range(10 + 1)])
     else:
         print("Invalid test number")
 
