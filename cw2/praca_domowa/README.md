@@ -28,11 +28,6 @@ qemu-system-aarch64 \
 
 `vi /etc/config/network`
 ```
-#config device
-#       option name 'br-lan'
-#       option type 'bridge'
-#       list ports 'eth0'
-
 config interface 'lan'
         option device 'br-lan'
         option proto 'dhcp'
@@ -58,26 +53,58 @@ config interface 'lan'
 
 `opkg install python3`
 
-3. Przesyłamy program `pwm.py` generujący sygnał pwm:
+3. Przesyłamy pliki generujące sygnał pwm:
 
 `scp -P 8888 pwm.py "root@localhost:~"`
+`scp -P 8888 pwm_variable_duty_cycle.py "root@localhost:~"`
+`scp -P 8888 pwm_variable_frequency.py "root@localhost:~"`
 
-### Generacja sygnałów o zmiennej częstotliwości
+### Generacja sygnałów o stałym wypełnieniu i częstotliwości
 
-1. Uruchamiamy program `pwm.py` z flagą `test` ustawioną na `0`
+1. Uruchamiamy program `pwm.py`
 
-`python3 pwm.py -t 0`
+`python3 pwm.py`
 
-2. Otrzymujemy program generujący sygnał pwm o zmiennej częstotliwości:
+2. Kopiujemy rezultat na komputer z dostępnym gui:
 
-![](images/test_t0.png)
+`scp -P 8888 "root@localhost:fixed_duty_cycle_and_frequency.txt" output/`
+
+3. Wynik programu generującego sygnał pwm o zmiennym wypełnieniu:
+
+`python3 plot.py < output/fixed_duty_cycle_and_frequency.txt`
+
+![](./images/Fixed.png)
 
 ### Generacja sygnałów o zmiennym wypełnieniu
 
-1. Uruchamiamy program `pwm.py` z flagą `test` ustawioną na `1`
+1. Uruchamiamy program `pwm_variable_duty_cycle.py`
 
-`python3 pwm.py -t 1`
+`python3 pwm_variable_duty_cycle.py`
 
-2. Otrzymujemy program generujący sygnał pwm o zmiennym wypełnieniu:
+2. Kopiujemy rezultat na komputer z dostępnym gui:
 
-![](images/test_t1.png)
+`scp -P 8888 "root@localhost:variable_duty_cycle.txt" output/`
+
+3. Wynik programu generującego sygnał pwm o zmiennym wypełnieniu:
+
+`python3 plot.py < output/variable_duty_cycle.txt`
+
+![](./images/Variable_duty_cycle.png)
+
+### Generacja sygnałów o zmiennej częstotliwości
+
+1. Uruchamiamy program `pwm_variable_frequency.py`
+
+`python3 pwm_variable_frequency.py > variable_frequency.txt`
+
+2. Kopiujemy rezultat na komputer z dostępnym gui:
+
+`scp -P 8888 "root@localhost:variable_frequency.txt" output/`
+
+3. Wynik programu generującego sygnał pwm o zmiennej częstotliwości:
+
+`python3 plot.py < output/variable_frequency.txt`
+
+![](./images/Variable_frequency.png)
+
+
