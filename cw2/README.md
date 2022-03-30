@@ -6,7 +6,7 @@
 3. [X] Zadanie 2
 4. [X] Zadanie 3
 5. [X] Zadanie 4
-6. [] Zadanie 5
+6. [X] Zadanie 5
 
 ## Przygotowanie stanowiska
 
