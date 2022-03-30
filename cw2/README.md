@@ -12,8 +12,6 @@
 
 Podłączyliśmy urządnie RPi zgodnie ze schematem dołączonym do skryptu laboratoryjnego.
 
-<img src="images/1.0.jpg" width="75%"/>
-
 Prowadzący zweryfikował poprawność połączenia.
 
 ## Pierwsze uruchomienie RPi
@@ -22,7 +20,7 @@ Uruchomiliśmy terminal UART za pomocą programu tio `tio /dev/ttyUSB0`.
 
 Następnie włączyliśmy zasilanie i zalogowaliśmy się do urządenia.
 
-![](images/1.1.png)
+![](images/2.1.png)
 
 
 ## Instalacja OpenWRT z wykorzystaniem systemu ratunkowego
@@ -40,6 +38,8 @@ Rozpakowaliśmy obraz systemu:
 Zamontowaliśmy obraz systemu:
 
 `losetup -P -f openwrt-21.02.1-bcm27xx-bcm2711-rpi-4-ext4-factory.img`
+
+![](images/2.2.png)
 
 Przekopiowujemy obraz na drugą partycję:
 
@@ -67,13 +67,25 @@ Powiększyliśmy system plików:
 
 `resize2fs /dev/mmcblk0p2`
 
+![](images/2.3.png)
+
 Na koniec restartowaliśmy system:
 
 `reboot`
 
-Po po uruchomieniu systemu skonfigurowaliśmy interfejs sieciowy:
+![](images/2.4.png)
+
+Po po uruchomieniu systemu z OpenWRT skonfigurowaliśmy interfejs sieciowy:
 
 `vi /etc/config/network`
+
+![](images/2.5.png)
+
+I zrestartowaliśmy sieć:
+
+`/etc/init.d/network reload`
+
+![](images/2.6.png)
 
 Napotkaliśmy problemy z dns, tak więc dodaliśmy linijkę `nameserver 8.8.8.8` do pliku `/etc/resolv.conf`
 
@@ -98,23 +110,45 @@ Przetestowaliśmy działanie diody LED za pomocą sysfs
 `echo out > /sys/class/gpio/gpio27/direction`
 `echo 1 > /sys/class/gpio/gpio27/value`
 
+![](images/2.7.png)
+
+<img src="images/2.8.5.jpg" width="75%"/>
+
 ## Zadanie 1: GPIO - wyjście dla LED
 
-Napisaliśmy program który uruchamiał diodę LED 10 razy.
+Napisaliśmy program, który uruchamiał diodę LED 10 razy.
+
+<img src="images/2.8.5.jpg" width="75%"/>
 
 ## Zadanie 2: GPIO - wyjście dla LED z płynną zmianą jasności
 
-Napisaliśmy kod w pythonie który uruchamiał diodę LED 10 razy.
+Napisaliśmy kod w pythonie, który płynnie zmieniał jasność diody.
 
+<img src="images/2.8.5.jpg" width="75%"/>
 
 ## Zadanie 3: GPIO - wyjście PWM, buzzer pasywny
 
-Napisaliśmy kod w pythonie który uruchamiał diodę LED 10 razy.
+Napisaliśmy kod w pythonie, który generował kolejne dźwięki gamy C-dur w 2 oktawach.
 
+<img src="images/2.8.75.jpg" width="75%"/>
 
 ## Zadanie 4: GPIO - wejście
 
-Napisaliśmy kod w pythonie który uruchamiał diodę LED 10 razy.
+Napisaliśmy kod w pythonie, który włączał diodę, gdy trzymaliśmy przycisk oraz wyłączał ją gdy puszczaliśmy przycisk.
+
+<img src="images/2.8.5.jpg" width="75%"/>
 
 
 ## Zadanie 5: Akcesoria do wyboru
+
+Mieliśmy do wyboru kilka akcesoriów. Zdecydowaliśmy się na dalmierz.
+
+Przygotowaliśmy schemat dołączenia go do RPi:
+
+![](images/2.9.png)
+
+<img src="images/2.10.jpg" width="75%"/>
+
+Napisaliśmy kod w pythonie, który wyświetla odległość do przeszkody.
+
+![](images/2.11.png)
