@@ -1,4 +1,4 @@
-# [SKPS] - Laboratorium 1
+# [SKPS] - Laboratorium 2
 
 ## Zadania
 1. [X] Uruchomienie OpenWRT na RPI 4B
