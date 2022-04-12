@@ -12,9 +12,9 @@ Mateusz Brzozowski, Bartłomiej Krawczyk
 
 ## Przygotowanie SDK
 
-1. `wget https://archive.openwrt.org/releases/21.02.1/targets/armvirt/64/openwrt-sdk-21.02.1-armvirt-64_gcc-8.4.0_musl.Linux-x86_64.tar.xz` - pobranie SDK na Qemu
+1. `https://archive.openwrt.org/releases/21.02.1/targets/armvirt/64/openwrt-sdk-21.02.1-armvirt-64_gcc-8.4.0_musl.Linux-x86_64.tar.xz` - pobranie SDK na Qemu
 
-1. `wget https://downloads.openwrt.org/releases/21.02.1/targets/bcm27xx/bcm2711/openwrt-sdk-21.02.1-bcm27xx-bcm2711_gcc-8.4.0_musl.Linux-x86_64.tar.xz` - pobranie SDK na RPi
+1. `https://downloads.openwrt.org/releases/21.02.1/targets/bcm27xx/bcm2711/openwrt-sdk-21.02.1-bcm27xx-bcm2711_gcc-8.4.0_musl.Linux-x86_64.tar.xz` - pobranie SDK na RPi
 2. `tar -xaf openwrt-sdk-21.02.1-bcm27xx-bcm2711_gcc-8.4.0_musl.Linux-x86_64.tar.xz`- wypakowanie sdk
 3. `mv openwrt-sdk-21.02.1-bcm27xx-bcm2711_gcc-8.4.0_musl.Linux-x86_64/ openwrt-sdk/` - zmiana nazwy folderu
 4. `cd openwrt-sdk`
@@ -29,7 +29,7 @@ Mateusz Brzozowski, Bartłomiej Krawczyk
 6. `cd ..`
 
 ## 1. Pierwszy pakiet
-1. `wget https://moodle.usos.pw.edu.pl/pluginfile.php/217384/mod_folder/content/0/WZ_W03_przyklady.tar.xz` - pobranie paczki z pakietem demo1
+1. `https://moodle.usos.pw.edu.pl/pluginfile.php/217384/mod_folder/content/0/WZ_W03_przyklady.tar.xz` - pobranie paczki z pakietem demo1
 2. `tar -xaf WZ_W03_przyklady.tar.xz` - rozpakowanie paczki
 3. `cd openwrt-sdk`
 4. `export LANG=C`
@@ -43,8 +43,8 @@ src-link skps /home/user/SKPS/OpenWRT/packages/demo1_owrt_pkg
     - Examples (zaznaczamy):
         - demo1
         - demo1mak
-9. `make bin/packages/demo1/compile` lub `make package/demo1/compile -j1 V=s`
-9. `make bin/packages/demo1mak/compile` lub `make package/demo1mak/compile -j1 V=s`
+9. `make package/demo1/compile` lub `make package/demo1/compile -j1 V=s`
+9. `make package/demo1mak/compile` lub `make package/demo1mak/compile -j1 V=s`
 
 10. `cd packages/architektura/skps`
 11. `scp -P 8888 demo1.ipk "root@localhost:~"` - przesłanie pliku na OpenWRT
@@ -56,7 +56,7 @@ instalować z opcją `--force-reintstall`
 
 ## 2. Pakiety "worms" i "buggy"
 
-1. `wget https://moodle.usos.pw.edu.pl/pluginfile.php/217384/mod_folder/content/0/WZ_W03_przyklad_extbr.tar.xz` - pobranie paczki z pakietami worms i buggy
+1. `https://moodle.usos.pw.edu.pl/pluginfile.php/217384/mod_folder/content/0/WZ_W03_przyklad_extbr.tar.xz` - pobranie paczki z pakietami worms i buggy
 2. `tar -xaf WZ_W03_przyklad_extbr.tar.xz` - rozpakowanie paczki z pakietami
 
 # Przerobienie pakietów worms i buggy, aby były kompatybilne z OpenWRT
@@ -72,10 +72,10 @@ należy zainstalować ncurses w SDK:
 1. `opkg update`
 1. `opkg install gdb`- instalacja gdb za pomocą managera pakietów
 2. `opkg install gdbserver`- instalacja gdbserver za pomocą managera pakietów
-3. `gdbserver :9000 /bin/usr/bug3`
+3. `gdbserver 0.0.0.0:9000 /usr/bin/bug3`
 
 Na komputerze:
-1. `./scripts/remote-gdb localhost:9000 ./build_dir/target-aarch64_cortex-a72_musl/buggy-1.0/bug3`
+1. `./scripts/remote-gdb 0.0.0.0:8890 ./build_dir/target-aarch64_cortex-a53_musl/buggy-1.0/.pkgdir/buggy/usr/bin/bug1`
 
 ### Poszukiwanie błędów dla trzech programów z pakietu buggy za pomocą debuggera gdb
 
