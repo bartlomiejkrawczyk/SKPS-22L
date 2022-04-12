@@ -64,6 +64,7 @@ instalować z opcją `--force-reintstall`
 
 
 należy zainstalować ncurses w SDK:
+`./scripts/feeds install libncurses`
 `./scripts/feeds update -a`
 
 
