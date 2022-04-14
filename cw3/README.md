@@ -6,9 +6,9 @@ Systemy komputerowe w sterowaniu i pomiarach
 Mateusz Brzozowski, Bartłomiej Krawczyk
 
 # Plan laboratorium
-1. [ ] Zbudowanie i uruchomienie pakietu dostarczonego w materiałach do wykładu.
-2. [ ] Stworzenie pakietów OpenWRT na bazie dostarczonych kodów źródłowych.
-3. [ ] Zdalne debugowanie programów za pomocą gdb.
+1. [X] Zbudowanie i uruchomienie pakietu dostarczonego w materiałach do wykładu.
+2. [X] Stworzenie pakietów OpenWRT na bazie dostarczonych kodów źródłowych.
+3. [X] Zdalne debugowanie programów za pomocą gdb.
 
 ## Przygotowanie SDK
 
