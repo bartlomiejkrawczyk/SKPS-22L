@@ -123,7 +123,6 @@ w pętli for próbujemy się odwołac do table, jednakże wskaźnik "table" nie 
 
 ![](images/3.11.png)
 
-![](images/3.12.png)
 
 ![](images/3.13.png)
 
@@ -136,3 +135,5 @@ próujemy odwołać się poza rozmiar tablicy
 
 bug3:
 zapisywaliśmy literę i w miejsce 0
+
+![](images/3.10.png)
