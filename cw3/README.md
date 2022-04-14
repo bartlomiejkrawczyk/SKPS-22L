@@ -53,6 +53,10 @@ Na OpenWRT:
 
 instalować z opcją `--force-reintstall`
 
+Zainstalowany program:
+
+![](images/3.1.png)
+
 ## 2. Pakiety "worms" i "buggy"
 
 1. `https://moodle.usos.pw.edu.pl/pluginfile.php/217384/mod_folder/content/0/WZ_W03_przyklad_extbr.tar.xz` - pobranie paczki z pakietami worms i buggy
@@ -60,6 +64,12 @@ instalować z opcją `--force-reintstall`
 3. należy zainstalować ncurses w SDK: `./scripts/feeds install libncurses`
 4. należy zaktualizować listy pakietów: `./scripts/feeds update -a`, `./scripts/feeds install -p skps -a`
 4. Powtarzamy kroku z pierwszego etapu labolatorium
+
+Zainstalowane programy:
+
+![](images/3.2.png)
+
+![](images/3.3.png)
 
 
 ## 3. Debugowanie zdalne
@@ -82,23 +92,47 @@ Na komputerze:
 Przy pomocy gdb wykonaliśmy:
 - ustawienie breakpointu
 
+![](images/3.4.png)
+
 - pracę krokową
+
+![](images/3.5.png)
 
 - podgląd wartości zmiennej (jednorazowy)
 
+![](images/3.6.png)
+
 - podgląd wartości zmiennej (przy każdym kroku)
+
+![](images/3.7.png)
 
 - podgląd stosu
 
+![](images/3.8.png)
+
 - backtrace
 
+![](images/3.9.png)
+
 - wykorzystanie watchpoint'ów w programie bug3, aby sprawdzić kiedy następuje zapisanie wartości pod niewłaściwym adresem np. w s1[10]
+
+![](images/3.10.png)
 
 bug1:
 w pętli for próbujemy się odwołac do table, jednakże wskaźnik "table" nie jest zainicjalizowany.
 
+![](images/3.11.png)
+
+![](images/3.12.png)
+
+![](images/3.13.png)
+
 bug2:
 próujemy odwołać się poza rozmiar tablicy
+
+![](images/3.14.png)
+
+![](images/3.15.png)
 
 bug3:
 zapisywaliśmy literę i w miejsce 0
