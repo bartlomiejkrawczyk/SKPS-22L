@@ -18,36 +18,36 @@ Mateusz Brzozowski, Bartłomiej Krawczyk
 
 | Wariant  | Czas przetwarzania |
 |----------|--------------------|
-| Pierwszy | XXX XXX            |
-| Drugi    | XXX XXX            |
-| Trzeci   | XXX XXX            |
-| Czwarty  | XXX XXX            |
+| Pierwszy | 340 000            |
+| Drugi    | 485 000            |
+| Trzeci   | 595 000            |
+| Czwarty  | 753 000            |
 
 Parametry:
-- Liczba próbek : 100
+- Liczba próbek : 1000
 - Okres próbkowania : 10 000
 
 ## Rozkład czasu dostarczenia danych
 
 ### Pierwszy Wariant
-3 klientów, 1 rdzeń, pełne obciążenie, czas przetwarzania XXX XXX
+3 klientów, 1 rdzeń, pełne obciążenie, czas przetwarzania 170 000
 
-![](histograms/histogram_1.png)
+![](histograms/4_3_1/histogram.png)
 
 ### Drugi Wariant
-3 klientów, 2 rdzenie, pełne obciążenie, czas przetwarzania XXX XXX
+3 klientów, 2 rdzenie, pełne obciążenie, czas przetwarzania 242 500
 
-![](histograms/histogram_2.png)
+![](histograms/4_3_2/histogram.png)
 
 ### Trzeci Wariant
-3 klientów, 2 rdzenie, pełne obciążenie, czas przetwarzania XXX XXX
+3 klientów, 2 rdzenie, pełne obciążenie, czas przetwarzania 297 500
 
-![](histograms/histogram_3.png)
+![](histograms/4_3_3/histogram.png)
 
 ### Czwarty Wariant
-1 klientów, 4 rdzenie, pełne obciążenie, czas przetwarzania XXX XXX
+1 klientów, 4 rdzenie, pełne obciążenie, czas przetwarzania 376 500
 
-![](histograms/histogram_4.png)
+![](histograms/4_1_4/histogram.png)
 
 ## Aktywne oczekiwanie
 
@@ -55,19 +55,23 @@ Parametry:
 - Liczba rdzeni : 4
 - Liczba klientów : 3
 - Obciążenie: brak
-- Liczba próbek : 100
+- Liczba próbek : 200
 - Okres próbkowania : 10 000
-- Czas przetwarzania : XXX XXX
+- Czas przetwarzania : 300 000
+
+### Zerowy wariant
+
+![](histograms/5_3_0/histogram.png)
 
 ### Pierwszy Wariant
 aktywne oczekiwanie klienta numer 0
 
-![](histograms/histogram_5_1.png)
+![](histograms/5_3_1/histogram.png)
 
 ### Drugi Wariant
 aktywne oczekiwanie wszystkich klientów
 
-![](histograms/histogram_5_2.png)
+![](histograms/5_3_2/histogram.png)
 
 
 ## Właściwy pomiar czasu
@@ -78,7 +82,11 @@ Parametry:
 - Obciążenie: brak
 - Liczba próbek : 100
 - Okres próbkowania : 10 000
-- Czas przetwarzania : XXX XXX
+- Czas przetwarzania : 376 500
+
+### Zerowy Wariant
+
+![](histograms/6_0/histogram.png)
 
 ### Pierwszy Wariant
 ![](histograms/histogram_6.png)
@@ -89,3 +97,7 @@ Parametry:
 Nie jest on właściwy.
 
 - Proszę wyjaśnić obserwowany efekt.
+
+Funkcja `usleep`:
+- nie bierze pod uwagę czasu, w którym jedna iteracja pętli jest wykonywana
+- gwarantuje, że proces jest uśpiony określoną ilość `μs`, ale ilość ta może być większa

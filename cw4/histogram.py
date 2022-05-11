@@ -38,9 +38,10 @@ def main():
                      for line in file if line][1:]
                 )
 
-    plt.hist(servers, label=['Original', 'Modified'], bins=20)
+    plt.hist(servers, label=['Original', 'Modified'], bins=50)
     plt.xlabel('Delivery Time [us]')
     plt.ylabel('Number of Occurrences')
+    plt.legend()
     plt.savefig('./histograms/histogram_6.png')
 
 
