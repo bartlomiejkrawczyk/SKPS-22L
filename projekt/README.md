@@ -8,7 +8,7 @@ Mateusz Brzozowski, Bartłomiej Krawczyk
 ## Praca domowa 1
 1. [X] Wybranie tematu
 2. [X] Opis działania
-3. [ ] Schemat
+3. [X] Schemat
 4. [ ] Opracowanie szkieletu pakietu OpenWRT,
 5. [ ] Zbudowanie go dla qemu i uruchomienie na qemu.
 
@@ -52,3 +52,7 @@ while Dokonuj pomiaru:
     Zapisz dane do listy o stałej długości (odpowiednio nadpisując stare dane)
     Na podstawie danych z listy wygeneruj wykres
 ```
+
+# Schemat Połączeń
+
+![](./schema/schemat.png)
