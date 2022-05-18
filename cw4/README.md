@@ -6,12 +6,12 @@ Systemy komputerowe w sterowaniu i pomiarach
 Mateusz Brzozowski, Bartłomiej Krawczyk
 
 # Plan laboratorium
-1. [ ] Przetestowanie działania programów na “gospodarzu”
-2. [ ] Zbudowanie pakietu dla OpenWRT
-3. [ ] Ustalenie granicznej wartości czasu przetwarzania
-4. [ ] Rozkład czasu dostarczenia danych
-5. [ ] Aktywne oczekiwanie
-6. [ ] Właściwy pomiar czasu
+1. [X] Przetestowanie działania programów na “gospodarzu”
+2. [X] Zbudowanie pakietu dla OpenWRT
+3. [X] Ustalenie granicznej wartości czasu przetwarzania
+4. [X] Rozkład czasu dostarczenia danych
+5. [X] Aktywne oczekiwanie
+6. [X] Właściwy pomiar czasu
 
 
 ## Ustalenie granicznej wartości czasu przetwarzania
