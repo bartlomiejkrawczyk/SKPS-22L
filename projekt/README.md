@@ -56,3 +56,11 @@ while Dokonuj pomiaru:
 # Schemat Połączeń
 
 ![](./schema/schemat.png)
+
+
+<!-- TODO:
+INSTALL:
+- Make
+- GCC/G++
+
+ -->
