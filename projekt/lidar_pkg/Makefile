@@ -10,6 +10,7 @@ PKG_RELEASE:=1
 # This is a custom variable, used below
 SOURCE_DIR:=./src
 
+PKG_BUILD_DIR := $(BUILD_DIR)/$(PKG_NAME)
 include $(INCLUDE_DIR)/package.mk
 
 # Package definition; instructs on how and where our package will appear in the overall configuration menu ('make menuconfig')
@@ -26,22 +27,21 @@ endef
 
 # Package preparation instructions; create the build directory and copy the source code. 
 # The last command is necessary to ensure our preparation instructions remain compatible with the patching system.
-define Build/Prepare
-	mkdir -p $(PKG_BUILD_DIR)
-	cp $(SOURCE_DIR)/* $(PKG_BUILD_DIR)
-	$(Build/Patch)
+#define Build/Prepare
+#	mkdir -p $(PKG_BUILD_DIR)
+#	cp $(SOURCE_DIR)/* $(PKG_BUILD_DIR)
+#	$(Build/Patch)
+#endef
+
+define Build/Configure
 endef
 
 # Package build instructions; invoke the target-specific compiler to first compile the source file, and then to link the file into the final executable
 define Build/Compile
-	# FIX ME
-	
-	# $(TARGET_CC) $(TARGET_CFLAGS) -o $(PKG_BUILD_DIR)/main.o -c $(PKG_BUILD_DIR)/main.cpp
-	# $(TARGET_CC) $(TARGET_CFLAGS) -o $(PKG_BUILD_DIR)/connection.o -c $(PKG_BUILD_DIR)/connection.cpp
-	# $(TARGET_CC) $(TARGET_LDFLAGS) -o $(PKG_BUILD_DIR)/main $(PKG_BUILD_DIR)/main.o
-	# $(TARGET_CC) $(TARGET_LDFLAGS) -o $(PKG_BUILD_DIR)/connection $(PKG_BUILD_DIR)/connection.o
-
-	# $(MAKE) -C $(PKG_BUILD_DIR)  CC="$(TARGET_CC)"  CFLAGS="$(TARGET_CFLAGS) -Wall"  LDFLAGS="$(TARGET_LDFLAGS)"
+	$(MAKE) -C $(PKG_BUILD_DIR) \
+			CC="$(TARGET_CC)" \
+			CFLAGS="$(TARGET_CFLAGS) -Wall" \
+			LDFLAGS="$(TARGET_LDFLAGS)"
 endef
 
 # Package install instructions; create a directory inside the package to hold our executable, and then copy the executable we built previously into the folder

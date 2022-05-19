@@ -26,9 +26,7 @@ Mateusz Brzozowski, Bartłomiej Krawczyk
 while Dokonuj pomiaru:
     Obrót serwomechanizmu o niewielki_kąt
     Wykonanie pomiaru odległości za pomocą czujnika time of flight
-    Pobierz mutex od bufora
-    Zapis pomiaru oraz aktualnego kąta do bufora
-    Zwolnij mutex
+    Zapis pomiaru oraz aktualnego kąta do kolejki komunikatów
     if kąt == 0 lub 360:
         niewielki_kąt = -niewielki_kąt
 ```
@@ -37,9 +35,7 @@ while Dokonuj pomiaru:
 
 ```py
 while Dokonuj pomiaru:
-    Pobierz mutex od bufora
-    Odczytaj dane z bufora
-    Zwolnij mutex
+    Odczytaj dane z kolejki komunikatów
     Prześlij odczytane dane do komputera
 ```
 
