@@ -1,8 +1,10 @@
 from matplotlib import pyplot as plt
-from random import randint
-from math import sin, cos, radians
+from math import dist, sin, cos, radians
 import time
+import socket
 
+HOST = ''
+PORT = 8888
 
 MAX_DEGREE = 360
 MIN_DEGREE = 0
@@ -13,18 +15,20 @@ VALUES = ((MAX_DEGREE - MIN_DEGREE) // STEP)
 MAX_DISTANCE = 100
 
 
-i = 0
-
-
 def receive_measurement():
-    """
-    Mock function for generating angle, distance pairs
-    TODO: Replace with the real function when ready
-    """
-    global i
-    time.sleep(0.01)  # simulate taking the measurement
-    i = (i + STEP) % (MAX_DEGREE - MIN_DEGREE)
-    return i + MIN_DEGREE, randint(90, 100)
+    global soc
+    data = str(soc.recv(1024))
+
+    angle, distance = data[2:-5].split(',')
+
+    angle = int(angle)
+    distance = int(distance)
+
+    print(f'{angle=}')
+    print(f'{distance=}')
+    print()
+
+    return angle, distance
 
 
 def calculate_coordinates(angle, radius):
@@ -55,6 +59,14 @@ plt.xlim(-MAX_DISTANCE, MAX_DISTANCE)
 plt.ylim(-MAX_DISTANCE, MAX_DISTANCE)
 
 plt.show()
+
+
+# Setup Connection to RPI
+soc = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+soc.connect((HOST, PORT))
+
+# Initialize connection by sending message
+soc.send(b"S")
 
 # Loop through the program until the window is closed
 while plt.fignum_exists(figure.number):
