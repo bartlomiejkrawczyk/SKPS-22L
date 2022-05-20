@@ -25,7 +25,7 @@ while True:
     plt.ylim([-10,10])
     figure.canvas.draw()
     figure.canvas.flush_events()
-    time.sleep(0.01)
+    # time.sleep(0.01)
 
     i = (i + 1) % (MAX_DEGREE - MIN_DEGREE)
     if i == MIN_DEGREE or i == MAX_DEGREE:
