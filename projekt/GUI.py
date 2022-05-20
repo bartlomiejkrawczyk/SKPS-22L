@@ -1,6 +1,5 @@
 from matplotlib import pyplot as plt
-from math import dist, sin, cos, radians
-import time
+from math import sin, cos, radians
 import socket
 
 HOST = ''
