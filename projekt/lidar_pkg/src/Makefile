@@ -9,11 +9,11 @@ libVL53L0X_Rasp.a:
 
 
 lidar: main.cpp libVL53L0X_Rasp.a
-	$(CC) -I VL53L0X_rasp/platform/inc -I VL53L0X_API/Api/core/inc $(CFLAGS) -o main main.cpp -LVL53L0X_rasp/bin -lVL53L0X_Rasp
+	$(CC) -I VL53L0X_rasp/platform/inc -I VL53L0X_API/Api/core/inc $(CFLAGS) -o main main.cpp -LVL53L0X_rasp/bin -lVL53L0X_Rasp -lrt
 
 
 connection: connection.cpp
-	$(CC) $(CFLAGS) -o connection connection.cpp
+	$(CC) $(CFLAGS) -o connection connection.cpp -lrt -std=c++2a
 
 
 clean:

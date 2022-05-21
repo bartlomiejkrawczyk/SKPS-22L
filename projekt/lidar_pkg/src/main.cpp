@@ -1,3 +1,4 @@
+#include <mqueue.h>
 #include <unistd.h>
 
 #include <fstream>
@@ -8,9 +9,9 @@
 #include "vl53l0x_api.h"
 #include "vl53l0x_platform.h"
 
-#define MAX_DEGREE 360
-#define MIN_DEGREE 10
-#define STEP 5
+#define MAX_DEGREE 180
+#define MIN_DEGREE 120
+#define STEP 10
 
 #define MIN_DUTY_CYCLE 1'000'000
 #define MAX_DUTY_CYCLE 2'000'000
@@ -187,15 +188,39 @@ void rotate_servo(uint16_t angle) {
 
 // Message Queue
 
+mqd_t volatile queue_data = 0;
+
+void open_queue() {
+    queue_data = mq_open("/data", O_WRONLY);
+    if (queue_data < 0) {
+        std::cerr << "Queue_data: failed" << std::endl;
+        exit(EXIT_FAILURE);
+    }
+}
+
 void send_data(uint16_t angle, uint16_t distance) {
     std::cout << "angle = " << angle << std::endl;
     std::cout << "distance = " << distance << std::endl;
     std::cout << std::endl;
+
+    std::string data = std::to_string(angle) + "," + std::to_string(distance);
+    int sent = mq_send(queue_data, data.c_str(), data.size() + 1, 1);
+    if (sent < 0) {
+        std::cerr << "Queue_data: failed to send" << std::endl;
+        exit(EXIT_FAILURE);
+    }
+}
+
+void close_queue() {
+    if (queue_data > 0) {
+        mq_close(queue_data);
+    }
 }
 
 void clean_at_exit() {
     close_sensor();
     unexport_pwm();
+    close_queue();
 }
 
 int main() {
@@ -208,14 +233,19 @@ int main() {
         return EXIT_FAILURE;
     }
 
+    open_queue();
+
     VL53L0X_Dev_t sensor;
     initialize_sensor(sensor);
 
     export_pwm();
 
-    uint16_t angle = MIN_DEGREE;
+    uint16_t max_angle = MAX_DEGREE % STEP == 0 ? MAX_DEGREE : (MAX_DEGREE / STEP);
+    uint16_t min_angle = MIN_DEGREE % STEP == 0 ? MIN_DEGREE : (MIN_DEGREE / STEP) * STEP + STEP;
+
+    uint16_t angle = min_angle;
     uint16_t distance = 0;
-    int direction = 1;
+    int direction = STEP;
 
     while (true) {
         rotate_servo(angle);
@@ -223,12 +253,12 @@ int main() {
 
         send_data(angle, distance);
 
-        angle += direction * STEP;
+        angle += direction;
         if (angle >= MAX_DEGREE) {
-            angle = MAX_DEGREE;
+            angle = max_angle;
             direction = -direction;
         } else if (angle <= MIN_DEGREE) {
-            angle = MIN_DEGREE;
+            angle = min_angle;
             direction = -direction;
         }
     }

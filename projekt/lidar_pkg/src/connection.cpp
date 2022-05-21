@@ -1,6 +1,8 @@
 // Server side implementation of UDP client-server model
 #include <arpa/inet.h>
+#include <mqueue.h>
 #include <netinet/in.h>
+#include <poll.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -14,6 +16,8 @@
 
 #define PORT 8888
 #define BUFFER_SIZE 256
+
+// UDP
 
 int create_socket() {
     // Create socket file descriptor
@@ -74,8 +78,35 @@ void receive(int &socket_file_descriptor, char *buffer, sockaddr_in &client_addr
     buffer[received] = '\0';
 }
 
+// Message Queue
+
+mqd_t volatile queue_data = 0;
+
+void open_queue() {
+    mq_unlink("/data");
+    queue_data = mq_open("/data", O_CREAT | O_RDONLY | O_EXCL, 0700, NULL);
+    if (queue_data < 0) {
+        std::cerr << "Open_queue: Failed to open" << std::endl;
+        exit(EXIT_FAILURE);
+    }
+}
+
+void close_queue() {
+    if (queue_data > 0) mq_close(queue_data);
+    mq_unlink("/data");
+}
+
 int main() {
     srand(3141592);
+
+    if (atexit(close_queue)) {
+        std::cerr << "Close_queue: failed" << std::endl;
+        return EXIT_FAILURE;
+    }
+
+    open_queue();
+
+    struct pollfd poll_descriptor = {.fd = queue_data, .events = POLLIN};
 
     char buffer[BUFFER_SIZE];
 
@@ -96,15 +127,27 @@ int main() {
 
     std::cout << "Hello, Client!" << std::endl;
 
-    int i = 0;
     while (true) {
-        // FIXME: Poll & dont send on pollhup or timeout
-        send(socket_file_descriptor, std::to_string(i) + "," + std::to_string(random() % 10 + 90),
-             client_address);
+        int ready = poll(&poll_descriptor, 1, -1);
 
-        usleep(250000);  // simulate measuring distance
+        if (ready < 0) {
+            std::cerr << "Poll: failed" << std::endl;
+            return EXIT_FAILURE;
+        }
 
-        i = (i + 5) % 360;
+        if (poll_descriptor.revents & POLLIN) {
+            struct mq_attr attribute;
+            mq_getattr(queue_data, &attribute);
+            char buffer[attribute.mq_msgsize];
+            ssize_t received = mq_receive(queue_data, buffer, attribute.mq_msgsize, NULL);
+
+            if (received < 0) {
+                std::cerr << "Mq_receive: failed" << std::endl;
+                return EXIT_FAILURE;
+            }
+            // FIXME: Poll & dont send on pollhup or timeout
+            send(socket_file_descriptor, buffer, client_address);
+        }
     }
 
     return 0;

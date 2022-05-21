@@ -5,11 +5,11 @@ import socket
 HOST = ''
 PORT = 8888
 
-MAX_DEGREE = 360
-MIN_DEGREE = 0
-STEP = 5
+MAX_DEGREE = 180
+MIN_DEGREE = 120
+STEP = 10
 
-VALUES = ((MAX_DEGREE - MIN_DEGREE) // STEP)
+VALUES = ((MAX_DEGREE - MIN_DEGREE) // STEP) + 1
 
 MAX_DISTANCE = 100
 
@@ -59,6 +59,8 @@ plt.ylim(-MAX_DISTANCE, MAX_DISTANCE)
 
 plt.show()
 
+figure.canvas.draw()
+figure.canvas.flush_events()
 
 # Setup Connection to RPI
 soc = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
