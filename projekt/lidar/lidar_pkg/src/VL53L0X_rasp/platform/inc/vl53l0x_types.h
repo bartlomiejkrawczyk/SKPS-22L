@@ -1,5 +1,5 @@
 /*******************************************************************************
-Copyright © 2015, STMicroelectronics International N.V.
+Copyright ï¿½ 2015, STMicroelectronics International N.V.
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
@@ -40,20 +40,22 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  *  contains type that must be defined for the platform\n
  *  when target platform and compiler provide stdint.h and stddef.h it is enough to include it.\n
- *  If stdint.h is not available review and adapt all signed and unsigned 8/16/32 bits basic types. \n
- *  If stddef.h is not available review and adapt NULL definition .
+ *  If stdint.h is not available review and adapt all signed and unsigned 8/16/32 bits basic types.
+ * \n If stddef.h is not available review and adapt NULL definition .
  */
-#include <stdint.h>
 #include <stddef.h>
+#include <stdint.h>
 
 #ifndef NULL
 #error "Error NULL definition should be done. Please add required include "
 #endif
 
+// #if ! defined(STDINT_H) &&  !defined(_GCC_STDINT_H) &&!defined(__STDINT_DECLS) &&
+// !defined(_GCC_WRAP_STDINT_H)
+#if 0
 
-#if ! defined(STDINT_H) &&  !defined(_GCC_STDINT_H) &&!defined(__STDINT_DECLS) && !defined(_GCC_WRAP_STDINT_H)
-
- #pragma message("Please review  type definition of STDINT define for your platform and add to list above ")
+#pragma message( \
+    "Please review  type definition of STDINT define for your platform and add to list above ")
 
  /*
   *  target platform do not provide stdint or use a different #define than above
@@ -101,7 +103,6 @@ typedef signed char int8_t;
 
 /** @}  */
 #endif /* _STDINT_H */
-
 
 /** use where fractional values are expected
  *

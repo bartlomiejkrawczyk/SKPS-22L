@@ -18,6 +18,7 @@ define Package/$(PKG_NAME)
   SECTION:=project
   CATEGORY:=Examples
   TITLE:=Lidar
+  DEPENDS:=+libstdcpp +libc
 endef
 
 # Package description; a more verbose description on what our package does
@@ -25,7 +26,7 @@ define Package/$(PKG_NAME)/description
   Contains executables needed for Raspberry Pi in order to take lidar measurements and send the data to PC (host).
 endef
 
-# Package preparation instructions; create the build directory and copy the source code. 
+# Package preparation instructions; create the build directory and copy the source code.
 # The last command is necessary to ensure our preparation instructions remain compatible with the patching system.
 #define Build/Prepare
 #	mkdir -p $(PKG_BUILD_DIR)
@@ -38,10 +39,15 @@ endef
 
 # Package build instructions; invoke the target-specific compiler to first compile the source file, and then to link the file into the final executable
 define Build/Compile
+	$(MAKE) -C "$(PKG_BUILD_DIR)/VL53L0X_rasp" clean
+	$(MAKE) -C "$(PKG_BUILD_DIR)" clean
 	$(MAKE) -C $(PKG_BUILD_DIR) \
+			CXX="$(TARGET_CXX)" \
 			CC="$(TARGET_CC)" \
-			CFLAGS="$(TARGET_CFLAGS) -Wall" \
+			CXXFLAGS="$(TARGET_CXXFLAGS)" \
+			CFLAGS="$(TARGET_CFLAGS)" \
 			LDFLAGS="$(TARGET_LDFLAGS)"
+
 endef
 
 # Package install instructions; create a directory inside the package to hold our executable, and then copy the executable we built previously into the folder

@@ -1,5 +1,6 @@
 // Server side implementation of UDP client-server model
 #include <arpa/inet.h>
+#include <fcntl.h>
 #include <mqueue.h>
 #include <netinet/in.h>
 #include <poll.h>
@@ -7,6 +8,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <sys/socket.h>
+#include <sys/stat.h>
 #include <sys/types.h>
 #include <unistd.h>
 
@@ -106,11 +108,12 @@ int main() {
 
     open_queue();
 
+    int socket_file_descriptor = create_socket();
+
     struct pollfd poll_descriptor = {.fd = queue_data, .events = POLLIN};
+    struct pollfd udp_descriptor = {.fd = socket_file_descriptor, .events = POLLOUT};
 
     char buffer[BUFFER_SIZE];
-
-    int socket_file_descriptor = create_socket();
 
     struct sockaddr_in server_address;
     setup_server_address(server_address);
@@ -145,8 +148,17 @@ int main() {
                 std::cerr << "Mq_receive: failed" << std::endl;
                 return EXIT_FAILURE;
             }
-            // FIXME: Poll & dont send on pollhup or timeout
-            send(socket_file_descriptor, buffer, client_address);
+
+            int done = poll(&udp_descriptor, 1, -1);
+            if (done < 0) {
+                std::cerr << "UDP Descriptor: failed" << std::endl;
+                return EXIT_FAILURE;
+            } else if (udp_descriptor.revents & POLLOUT) {
+                send(socket_file_descriptor, buffer, client_address);
+            } else if (udp_descriptor.revents & POLLHUP) {
+                close(socket_file_descriptor);
+                return 0;
+            }
         }
     }
 
