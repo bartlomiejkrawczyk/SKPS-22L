@@ -9,8 +9,8 @@ Mateusz Brzozowski, Bartłomiej Krawczyk
 1. [X] Wybranie tematu
 2. [X] Opis działania
 3. [X] Schemat
-4. [ ] Opracowanie szkieletu pakietu OpenWRT,
-5. [ ] Zbudowanie go dla qemu i uruchomienie na qemu.
+4. [X] Opracowanie szkieletu pakietu OpenWRT,
+5. [X] Zbudowanie go dla qemu i uruchomienie na qemu.
 
 ## Praca domowa 2
 1. [ ] Opracowanie interfejsu graficznego działającego na komputerze PC
@@ -52,6 +52,14 @@ while Dokonuj pomiaru:
 # Schemat Połączeń
 
 ![](./schema/schemat.png)
+
+# Połączenie PC - QEMU
+
+![](./Images/qemu_connection1.png)
+
+![](./Images/qemu_connection2.png)
+
+![](./Images/qemu_connection3.png)
 
 
 <!-- TODO:
