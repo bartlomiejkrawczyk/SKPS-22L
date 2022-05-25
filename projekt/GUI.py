@@ -11,7 +11,7 @@ STEP = 5
 
 VALUES = ((MAX_DEGREE - MIN_DEGREE) // STEP) + 1
 
-MAX_DISTANCE = 1500
+MAX_DISTANCE = 500
 
 
 def receive_measurement():
