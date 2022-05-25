@@ -21,9 +21,10 @@
 #define PWM_CHIP "/sys/class/pwm/pwmchip0"
 #define PWM_CHANNEL "/sys/class/pwm/pwmchip0/pwm0"
 
-// Sensor Time Of Flight
-
 // #define FAKE_DEVICES
+
+// Sensor Time Of Flight
+// https://github.com/cassou/VL53L0X_rasp/blob/master/examples/vl53l0x_SingleRanging_Long_Range_Example.c
 
 void check_sensor_status(VL53L0X_Error status) {
     if (status != VL53L0X_ERROR_NONE) {
@@ -152,6 +153,9 @@ void close_sensor() {
 
 // Servo
 
+// https://jumpnowtek.com/rpi/Using-the-Raspberry-Pi-Hardware-PWM-timers.html
+// https://www.cplusplus.com/doc/tutorial/files/
+
 void write(const std::string &file_path, const std::string &text) {
 #ifndef FAKE_DEVICES
     std::ofstream file;
@@ -189,6 +193,9 @@ void rotate_servo(uint16_t angle) {
 }
 
 // Message Queue
+
+// https://man7.org/linux/man-pages/man2/mq_open.2.html
+// https://w3.cs.jmu.edu/kirkpams/OpenCSF/Books/csf/html/MQueues.html
 
 mqd_t volatile queue_data = 0;
 

@@ -39,6 +39,7 @@ def calculate_coordinates(angle, radius):
 
 
 # Enable interactive mode
+# https://www.delftstack.com/howto/matplotlib/how-to-automate-plot-updates-in-matplotlib/
 plt.ion()
 
 figure, ax = plt.subplots(figsize=(10, 8))
@@ -63,6 +64,8 @@ plt.show()
 
 figure.canvas.draw()
 figure.canvas.flush_events()
+
+# https://wiki.python.org/moin/UdpCommunication
 
 # Setup Connection to RPI
 soc = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)

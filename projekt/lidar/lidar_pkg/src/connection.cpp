@@ -20,6 +20,7 @@
 #define BUFFER_SIZE 256
 
 // UDP
+// https://www.geeksforgeeks.org/udp-server-client-implementation-c/
 
 int create_socket() {
     // Create socket file descriptor
@@ -81,6 +82,8 @@ void receive(int &socket_file_descriptor, char *buffer, sockaddr_in &client_addr
 }
 
 // Message Queue
+// https://man7.org/linux/man-pages/man2/mq_open.2.html
+// https://w3.cs.jmu.edu/kirkpams/OpenCSF/Books/csf/html/MQueues.html
 
 mqd_t volatile queue_data = 0;
 
@@ -149,7 +152,7 @@ int main() {
                 return EXIT_FAILURE;
             }
 
-            int done = poll(&udp_descriptor, 1, -1);
+            int done = poll(&udp_descriptor, 1, 30000);
             if (done < 0) {
                 std::cerr << "UDP Descriptor: failed" << std::endl;
                 return EXIT_FAILURE;

@@ -80,6 +80,8 @@ VL53L0 - laserowy czujnik odległości (time of flight):
 
 UDP Server:
 - https://www.geeksforgeeks.org/udp-server-client-implementation-c/
+- Czekanie na zdarzenie na deskryptorze plików:
+    - https://man7.org/linux/man-pages/man2/poll.2.html
 
 UDP Client:
 - https://wiki.python.org/moin/UdpCommunication
@@ -87,6 +89,10 @@ UDP Client:
 Kolejki komunikatów:
 - https://man7.org/linux/man-pages/man2/mq_open.2.html
 - https://w3.cs.jmu.edu/kirkpams/OpenCSF/Books/csf/html/MQueues.html
+- Wykład 4:
+    - https://moodle.usos.pw.edu.pl/pluginfile.php/217384/mod_folder/content/0/WZ_W04_Komunikacja_mi%C4%99dzyprocesowa.pdf?forcedownload=1
+- Czekanie na zdarzenie na deskryptorze plików:
+    - https://man7.org/linux/man-pages/man2/poll.2.html
 
 Servo:
 - https://en.wikipedia.org/wiki/Servo_control
