@@ -62,11 +62,18 @@ while Dokonuj pomiaru:
 
 # Gotowy projekt
 
+## Ogólna struktura systemu
+
+![](./Images/connection.png)
+
+## Schemat działania
+
 |                                |                                |
 |--------------------------------|--------------------------------|
 | ![](./Images/up_to_down_1.jpg) | ![](./Images/up_to_down_2.jpg) |
 | ![](./Images/lidar_1.png)      | ![](./Images/lidar_2.png)      |
 
+## Zmontowany zestaw
 
 |                           |                           |
 |---------------------------|---------------------------|
@@ -74,7 +81,33 @@ while Dokonuj pomiaru:
 | ![](./Images/cables3.jpg) | ![](./Images/cables4.jpg) |
 | ![](./Images/cables5.jpg) | ![](./Images/cables6.jpg) |
 
-![](./Images/connection.png)
+## Wykorzystane urządznia
+
+- `Raspberry Pi 4B`
+- `VL53L0 - laserowy czujnik odległości (time of flight)`
+- `Servo TowerPro MG-996R Robot 180`
+
+## Wymaganie biblioteki
+
+RPI:
+- `kmod-i2c-bcm2835`
+- `kmod-pwm-bcm2835`
+- `lidar` - skompilowany pakiet OpenWRT z folderu lidar
+
+Dodatkowo należy dodać nakładki na drzewo urządzeń:
+- `dtoverlay=pwm-2chan`
+- `dtoverlay=i2c1`
+
+PC:
+- `socket`
+- `matplotlib`
+
+## Uruchomienie programu
+
+1. RPI: `connection &`
+2. PC: `python ./GUI.py`
+3. RPI: `main`
+
 
 # Pomocne Linki
 
