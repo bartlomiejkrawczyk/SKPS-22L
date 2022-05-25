@@ -51,21 +51,30 @@ while Dokonuj pomiaru:
 
 # Schemat Połączeń
 
-![](./schema/schemat.png)
+<img src="schema/schemat.png" width="50%"/>
 
 # Połączenie PC - QEMU
 
-![](./Images/qemu_connection1.png)
+|                                    |                                    |                                    |
+|------------------------------------|------------------------------------|------------------------------------|
+| ![](./Images/qemu_connection1.png) | ![](./Images/qemu_connection2.png) | ![](./Images/qemu_connection3.png) |
 
-![](./Images/qemu_connection2.png)
-
-![](./Images/qemu_connection3.png)
 
 # Gotowy projekt
 
-![](./Images/lidar_1.png)
+|                                | <div style=visibility:hidden>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</div> |
+|--------------------------------|--------------------------------------------------------------------------------------|
+| ![](./Images/up_to_down_1.jpg) | ![](./Images/lidar_1.png)                                                            |
+| ![](./Images/up_to_down_2.jpg) | ![](./Images/lidar_2.png)                                                            |
 
-![](./Images/lidar_2.png)
+
+|                           |                           |
+|---------------------------|---------------------------|
+| ![](./Images/cables1.jpg) | ![](./Images/cables2.jpg) |
+| ![](./Images/cables3.jpg) | ![](./Images/cables4.jpg) |
+| ![](./Images/cables5.jpg) | ![](./Images/cables6.jpg) |
+
+![](./Images/connection.png)
 
 # Pomocne Linki
 
