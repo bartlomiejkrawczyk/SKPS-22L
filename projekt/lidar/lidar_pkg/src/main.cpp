@@ -12,18 +12,18 @@
 #include "vl53l0x_platform.h"
 
 #define MAX_DEGREE 180
-#define MIN_DEGREE 120
-#define STEP 10
+#define MIN_DEGREE 0
+#define STEP 5
 
 #define MIN_DUTY_CYCLE 1'000'000
 #define MAX_DUTY_CYCLE 2'000'000
 
-#define PWM_CHIP "/sys/class/pwm/pwmchip1"
-#define PWM_CHANNEL "/sys/class/pwm/pwmchip1/pwm0"
+#define PWM_CHIP "/sys/class/pwm/pwmchip0"
+#define PWM_CHANNEL "/sys/class/pwm/pwmchip0/pwm0"
 
 // Sensor Time Of Flight
 
-#define FAKE_DEVICES
+// #define FAKE_DEVICES
 
 void check_sensor_status(VL53L0X_Error status) {
     if (status != VL53L0X_ERROR_NONE) {
