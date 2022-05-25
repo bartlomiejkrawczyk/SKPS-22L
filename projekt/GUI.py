@@ -2,29 +2,31 @@ from matplotlib import pyplot as plt
 from math import sin, cos, radians
 import socket
 
-HOST = ''
+HOST = '10.42.0.230'
 PORT = 8888
 
 MAX_DEGREE = 180
-MIN_DEGREE = 120
-STEP = 10
+MIN_DEGREE = 0
+STEP = 5
 
 VALUES = ((MAX_DEGREE - MIN_DEGREE) // STEP) + 1
 
-MAX_DISTANCE = 100
+MAX_DISTANCE = 1500
 
 
 def receive_measurement():
     global soc
     data = str(soc.recv(1024))
 
-    angle, distance = data[2:-5].split(',')
+    print(data)
+
+    angle, distance = data[:-1].split(',')
 
     angle = int(angle)
     distance = int(distance)
 
-    print(f'{angle=}')
-    print(f'{distance=}')
+    print('agnle = ', angle)
+    print('distance = ', distance)
     print()
 
     return angle, distance
@@ -32,7 +34,7 @@ def receive_measurement():
 
 def calculate_coordinates(angle, radius):
     x = radius * sin(radians(angle))
-    y = radius * cos(radians(angle))
+    y = - radius * cos(radians(angle))
     return x, y
 
 
