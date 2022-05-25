@@ -62,10 +62,10 @@ while Dokonuj pomiaru:
 
 # Gotowy projekt
 
-|                                | <div style=visibility:hidden>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</div> |
-|--------------------------------|--------------------------------------------------------------------------------------|
-| ![](./Images/up_to_down_1.jpg) | ![](./Images/lidar_1.png)                                                            |
-| ![](./Images/up_to_down_2.jpg) | ![](./Images/lidar_2.png)                                                            |
+|                                |                                |
+|--------------------------------|--------------------------------|
+| ![](./Images/up_to_down_1.jpg) | ![](./Images/up_to_down_2.jpg) |
+| ![](./Images/lidar_1.png)      | ![](./Images/lidar_2.png)      |
 
 
 |                           |                           |
