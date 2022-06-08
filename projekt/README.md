@@ -1,4 +1,4 @@
-# [SKPS] - Laboratorium 4
+# [SKPS] - Projekt
 
 Przedmiot:
 Systemy komputerowe w sterowaniu i pomiarach
